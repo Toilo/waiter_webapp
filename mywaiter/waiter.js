@@ -6,7 +6,10 @@ console.log("Loaded");
 }
   const addWaiter = function(req, res){
     // res.send(req.params.username);
-res.render("waitersview/waiter");
+    let msg = "Welcome "+req.params.username
+res.render("waitersview/waiter",{
+  welcome: msg
+})
   }
 
   const daysWaiter = function(req, res){
