@@ -1,8 +1,21 @@
 <form class="form" action="/waiters/{{username}}" method="post">
 <div class="row"></div>
-<div class="col-md-4">
-  <h1 class="text-center">Book Days</h1>
-  <h2>{{welcome}}</h2>
+  <div class="col-md-4">
+    <h1 class="text-center">Book Days</h1>
+    <h2>{{welcome}}</h2>
+    <p>{{#if messages.error}}
+        {{messages.error}}
+      {{/if}}</p>
+    <div class="">
+      <input type="checkbox" name="days" value="Sunday" {{#if shift.Sunday}} checked {{/if}}> Sunday
+      <input type="checkbox" name="days" value="Monday" {{#if shift.Monday}} checked {{/if}}> Monday
+      <input type="checkbox" name="days" value="Tuesday" {{#if shift.Tuesday}} checked {{/if}}> Tuesday
+      <input type="checkbox" name="days" value="Wednesday" {{#if shift.Tuesday}} checked {{/if}}> Wednesday
+      <input type="checkbox" name="days" value="Thursday" {{#if shift.Tuesday}} checked {{/if}}> Thursday
+      <input type="checkbox" name="days" value="Friday" {{#if shift.Tuesday}} checked {{/if}}> Friday
+      <input type="checkbox" name="days" value="Saturday" {{#if shift.Tuesday}} checked {{/if}}> Saturday
+    </div>
+<input type="submit" name="" value="Submit">
+  </div>
 
-</div>
 </form>

@@ -4,7 +4,7 @@ const bodyParser = require('body-parser')
 const flash = require('express-flash')
 const session = require('express-session')
 //Declaring Mongo Database Connection String
-const mongoUrl = process.env.Mongo_DB_URL || 'mongodb://localhost/waitersMDB'
+const mongoUrl = process.env.Mongo_DB_URL || 'mongodb://localhost/waitersDatabase'
 
 const WaiterRoutes = require('./mywaiter/waiter')
 const Models = require('./model/models')
@@ -29,11 +29,11 @@ app.use(flash())
 
 //Waiter's routes
 app.get('/', waiterRoutes.index)
-app.get('/waiters/:username', waiterRoutes.addWaiter)
+app.get('/waiters/:username', waiterRoutes.showWaiterScreen)
 app.post('/waiters/:username', waiterRoutes.addWaiter)
 app.get('/days', waiterRoutes.daysWaiter)
 
-app.set('port', (process.env.port || 5000))
+app.set('port', (process.env.port || 3000))
 app.listen(app.get('port'), function(){
   console.log("waiter_webapp started on port:", app.get('port'))
 })
