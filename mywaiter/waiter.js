@@ -43,7 +43,7 @@ module.exports = function(models) {
 const addWaiter = function(req, res, next){
     let waiter = {
     name: convertName(req.params.username),
-    days: [req.body.days]
+    days: req.body.days
   }
   models.Waiters.create(waiter, function(err, success) {
     if (err) {
@@ -56,8 +56,17 @@ const addWaiter = function(req, res, next){
   })
 }
 
-  const daysWaiter = function(req, res) {
+  const daysWaiter = function(req, res, next) {
+    models.Waiters.find({}, function(err, roster) {
+      if (err) {
+        return next(err)
+      }else {
+        res.render("waitersview/admin",{
+          waiters: roster
+        })
+      }
 
+    })
   }
 
   return {
