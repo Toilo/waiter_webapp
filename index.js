@@ -4,7 +4,7 @@ const bodyParser = require('body-parser')
 const flash = require('express-flash')
 const session = require('express-session')
 //Declaring Mongo Database Connection String
-const mongoUrl = process.env.Mongo_DB_URL || 'mongodb://localhost/waitersDatabase'
+const mongoUrl = process.env.MONGO_DB_URL || 'mongodb://localhost/waitersDatabase'
 
 const WaiterRoutes = require('./mywaiter/waiter')
 const Models = require('./model/models')
