@@ -5,8 +5,8 @@ mongoose.Promise = global.Promise
 mongoose.connect(mongoUrl)
 
 const waiterSchema = mongoose.Schema({
-  name: String,
-  days: [String]
+  days: [],
+  name: String
 })
 
 waiterSchema.index({name : 1}, {unique : true})

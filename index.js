@@ -13,7 +13,7 @@ const models = Models(mongoUrl)
 const waiterRoutes = WaiterRoutes(models) //Instantiate the routes
 
 const app = express() //Instantiate expressjs server
-app.engine('handlebars', exphbs({defaultLaout: 'main'}))
+app.engine('handlebars', exphbs({defaultLayout: 'main'}))
 app.set('view engine', 'handlebars')
 app.use(express.static('public'))
 

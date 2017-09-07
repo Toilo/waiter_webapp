@@ -1,21 +1,48 @@
-<form class="form" action="/waiters/{{username}}" method="post">
-<div class="row"></div>
-  <div class="col-md-4">
-    <h1 class="text-center">Book Days</h1>
-    <h2>{{welcome}}</h2>
-    <p>{{#if messages.error}}
-        {{messages.error}}
-      {{/if}}</p>
-    <div class="">
-      <input type="checkbox" name="days" value="Sunday" {{#if shift.Sunday}} checked {{/if}}> Sunday
-      <input type="checkbox" name="days" value="Monday" {{#if shift.Monday}} checked {{/if}}> Monday
-      <input type="checkbox" name="days" value="Tuesday" {{#if shift.Tuesday}} checked {{/if}}> Tuesday
-      <input type="checkbox" name="days" value="Wednesday" {{#if shift.Tuesday}} checked {{/if}}> Wednesday
-      <input type="checkbox" name="days" value="Thursday" {{#if shift.Tuesday}} checked {{/if}}> Thursday
-      <input type="checkbox" name="days" value="Friday" {{#if shift.Tuesday}} checked {{/if}}> Friday
-      <input type="checkbox" name="days" value="Saturday" {{#if shift.Tuesday}} checked {{/if}}> Saturday
-    </div>
-<input type="submit" name="" value="Submit">
-  </div>
+<div   class="container">
+  <div class="row text-center">
+    <form class="form text-center" action="/waiters/{{username}}" method="post">
+<br>
+<br>
 
-</form>
+      <h2 class="text-center">{{welcome}}</h2>
+        <p>
+          {{#if messages.error}}
+            {{messages.error}}
+          {{/if}}
+        </p>
+
+        <div class="col-md-6 col-sm-6 btn-group data-toggle=" buttons "">
+          <label class="btn btn-success">
+        <input type="checkbox" name="days" value="Sunday" {{#if shift.Sunday}} checked {{/if}}> Sunday
+      </label>
+          <label class="btn btn-primary">
+        <input type="checkbox" name="days" value="Monday" {{#if shift.Monday}} checked {{/if}}> Monday
+      </label>
+          <label class="btn btn-info">
+        <input type="checkbox" name="days" value="Tuesday" {{#if shift.Tuesday}} checked {{/if}}> Tuesday
+      </label>
+          <label class="btn btn-success">
+        <input type="checkbox" name="days" value="Wednesday" {{#if shift.Wednesday}} checked {{/if}}> Wednesday
+      </label>
+          <label class="btn btn-warning">
+        <input type="checkbox" name="days" value="Thursday" {{#if shift.Thursday}} checked {{/if}}> Thursday
+      </label>
+          <label class="btn btn-danger">
+        <input type="checkbox" name="days" value="Friday" {{#if shift.Friday}} checked {{/if}}> Friday
+      </label>
+          <label class="btn btn-primary">
+        <input type="checkbox" name="days" value="Saturday" {{#if shift.Saturday}} checked {{/if}}> Saturday
+      </label>
+
+        </div>
+        <br>
+        <br>
+        <div class="row">
+          <div class="col-md-4"></div>
+          <div class="col-md-6">
+            <input type="submit" class=" btn-block btn" value="Submit">
+          </div>
+        </div>
+    </form>
+  </div>
+</div>
