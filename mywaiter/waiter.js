@@ -29,7 +29,6 @@ var daysObject = function(shifts) {
     }, function(err, shifts) {
       if (shifts) {
         daysObject(shifts)
-        console.log(shifts.days);
         res.render("waitersview/waiter", {
           shift: dayMap
         })
@@ -44,7 +43,7 @@ var daysObject = function(shifts) {
   }
 
   const addWaiter = function(req, res, next) {
-
+console.log("Button Submit valueL: "+req.body.btnSubmit);
     let waiter = {
       days: req.body.days,
       name: convertName(req.params.username)
@@ -67,69 +66,61 @@ var daysObject = function(shifts) {
       })
     }
   }
+  const admin = function (req, res) {
+    res.render('waitersview/admin')
+  }
+  const getWaitersByDays = function(serverRes, btn, availWaiters) {
+    if (btn === "Sunday") {
+      serverRes.render('waitersview/admin', {
+        sunWaiters: availWaiters
+      })
+      console.log(availWaiters);
+    }else if(btn === "Monday") {
+      serverRes.render('waitersview/admin', {
+        monWaiters: availWaiters
+      })
+    }
+    else if(btn === "Tuesday") {
+      serverRes.render('waitersview/admin', {
+        tuesWaiters: availWaiters
+      })
+    }else if(btn === "Wednesday") {
+      serverRes.render('waitersview/admin', {
+        wedWaiters: availWaiters
+      })
+    }else if(btn === "Thursday") {
+      serverRes.render('waitersview/admin', {
+        thursWaiters: availWaiters
+      })
+    }else if(btn === "Friday") {
+      serverRes.render('waitersview/admin', {
+        frWaiters: availWaiters
+      })
+    }
+    else if(btn === "Saturday") {
+      serverRes.render('waitersview/admin', {
+        satWaiters: availWaiters
+      })
+    }
+  }
+
   const daysWaiter = function(req, res, next) {
-    var monArray = []
-    var sunArray = []
-    var tuesArray = []
-    var wedArray = []
-    var thursArray = []
-    var frArray = []
-    var satArray = []
+    var btn = req.body.btnWaiter;
+  models.Waiters.find({days: btn}).exec(function(err, availWaiters){
+    if (err) {
+      return next(err);
+    }else {
+      getWaitersByDays(res, btn, availWaiters)
+    }
+  })
 
-    models.Waiters.find({}, function(err, shifts) {
-      if (err) {
-        return next(err)
-      } else {
-        for (var i = 0; i < shifts.length; i++) {
-          for (var j = 0; j < shifts[i].days.length; j++) {
-              if (shifts[i].days[j] === "Monday") {
-                monArray.push(shifts[i].name)
-                console.log(shifts[i].name);
-              }else if (shifts[i].days[j] === "Tuesday") {
-                tuesArray.push(shifts[i].name)
-
-              }else if (shifts[i].days[j] === "Wednesday") {
-                wedArray.push(shifts[i].name)
-
-              }else if (shifts[i].days[j] === "Thursday") {
-                thursArray.push(shifts[i].name)
-
-              }
-              else if (shifts[i].days[j] === "Friday") {
-                frArray.push(shifts[i].name)
-
-              }
-              else if (shifts[i].days[j] === "Saturday") {
-                satArray.push(shifts[i].name)
-
-              }else if (shifts[i].days[j] === "Sunday") {
-                sunArray.push(shifts[i].name)
-
-              }
-            }
-            // break
-        }
-        res.render("waitersview/admin", {
-          monWaiters:   monArray,
-          tuesWaiters:  tuesArray,
-          wedWaiters:   wedArray,
-          thursWaiters: thursArray,
-          frWaiters: frArray,
-          satWaiters: satArray,
-          sunWaiters: sunArray
-        })
-
-      }
-      monArray = 0;
-      tuesArray = 0;
-
-    })
   }
 
   return {
     index,
     showWaiterScreen,
     addWaiter,
-    daysWaiter
+    daysWaiter,
+    admin
   }
 };

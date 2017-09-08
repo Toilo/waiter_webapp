@@ -31,7 +31,9 @@ app.use(flash())
 app.get('/', waiterRoutes.index)
 app.get('/waiters/:username', waiterRoutes.showWaiterScreen)
 app.post('/waiters/:username', waiterRoutes.addWaiter)
-app.get('/days', waiterRoutes.daysWaiter)
+app.get('/days', waiterRoutes.admin)
+app.post('/days', waiterRoutes.daysWaiter)
+
 
 app.set('port', (process.env.PORT || 5000))
 app.listen(app.get('port'), function(){
