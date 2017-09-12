@@ -22,7 +22,7 @@ var daysObject = function(shifts) {
   }
   const showWaiterScreen = function(req, res, next) {
     let username = convertName(req.params.username)
-    let msg = "Welcome " + username
+    let msg = "Welcome, " + username
 
     models.Waiters.findOne({
       name: username
