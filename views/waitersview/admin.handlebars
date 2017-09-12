@@ -1,37 +1,44 @@
-<h2>able Waiters</h2>
+<h2 class="text-center">Available Waiters</h2>
+<div class="row">
+  <div class="col-md-5"></div>
+  <div class="col-md-6">
+  <a href="/reset"><input type="button" class="btn-success btn btn-sm" value="Reset Shifts"></a>
+  </div>
+</div>
+<br>
 <form class="" action="/days" method="post">
 <div class="card-group">
 
-  <div class="card">
+  <div class="card bg-{{shadeSun}}">
     <div class="card-block">
       <!-- <a href="/days"> -->
         <input type="Submit" name="btnWaiter" value="Sunday" class="btn btn-primary btn-block">
       <!-- </form> -->
 
       <!-- </a> -->
-      <table class="table table-striped table-inverse table-responsive">
+      <table class="table table-striped  table-responsive">
         <thead>
 
         </thead>
         <tbody>
           {{#each sunWaiters}}
           <tr>
-            <td class="text-center">{{name}}</td>
+          <td class="text-center">
+            {{name}}
+          </td>
           </tr>
           {{/each}}
         </tbody>
       </table>
-
-      <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
     </div>
   </div>
 
-  <div class="card">
+  <div class="card bg-{{shadeMon}}">
     <div class="card-block">
       <!-- <form class="" action="/days" method="post"> -->
 
       <input type="Submit" name="btnWaiter" value="Monday" class="btn btn-primary btn-block">
-<table class="table table-striped table-inverse table-responsive">
+<table class="table table-striped  table-responsive">
   <thead>
 
   </thead>
@@ -46,10 +53,10 @@
     </div>
   </div>
 
-  <div class="card">
+  <div class="card bg-{{shadeTues}}">
     <div class="card-block">
       <input type="Submit" name="btnWaiter" value="Tuesday" class="btn btn-primary btn-block">
-      <table class="table table-striped table-inverse table-responsive">
+      <table class="table table-striped  table-responsive">
         <thead>
 
         </thead>
@@ -64,10 +71,10 @@
     </div>
   </div>
 
-  <div class="card">
+  <div class="card bg-{{shadeWed}}">
     <div class="card-block">
       <input type="Submit" name="btnWaiter" value="Wednesday" class="btn btn-primary btn-block">
-      <table class="table table-striped table-inverse table-responsive">
+      <table class="table table-striped  table-responsive">
         <thead>
 
         </thead>
@@ -82,10 +89,10 @@
     </div>
   </div>
 
-  <div class="card">
+  <div class="card bg-{{shadeThur}}">
     <div class="card-block">
       <input type="Submit" name="btnWaiter" value="Thursday" class="btn btn-primary btn-block">
-      <table class="table table-striped table-inverse table-responsive">
+      <table class="table table-striped  table-responsive">
         <thead>
 
         </thead>
@@ -100,10 +107,10 @@
      </div>
   </div>
 
-  <div class="card">
+  <div class="card bg-{{shadeFri}}">
     <div class="card-block">
       <input type="Submit" name="btnWaiter" value="Friday" class="btn btn-primary btn-block">
-      <table class="table table-striped table-inverse table-responsive">
+      <table class="table table-striped  table-responsive">
         <thead>
 
         </thead>
@@ -118,10 +125,10 @@
      </div>
   </div>
 
-  <div class="card">
+  <div class="card bg-{{shadeSat}}">
     <div class="card-block">
       <input type="Submit" name="btnWaiter" value="Saturday" class="btn btn-primary btn-block">
-      <table class="table table-striped table-inverse table-responsive">
+      <table class="table table-striped  table-responsive">
         <thead>
 
         </thead>

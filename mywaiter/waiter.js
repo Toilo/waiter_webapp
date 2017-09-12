@@ -30,6 +30,7 @@ var daysObject = function(shifts) {
       if (shifts) {
         daysObject(shifts)
         res.render("waitersview/waiter", {
+          username: username,
           shift: dayMap
         })
       } else {
@@ -43,84 +44,127 @@ var daysObject = function(shifts) {
   }
 
   const addWaiter = function(req, res, next) {
-console.log("Button Submit valueL: "+req.body.btnSubmit);
     let waiter = {
       days: req.body.days,
       name: convertName(req.params.username)
     }
+
     if (waiter.days === undefined) {
       req.flash('error', 'Please select your shifts');
       res.render("waitersview/waiter", {
         username: waiter.name
       })
-
-    }else {
+    } else {
       models.Waiters.create(waiter, function(err, success) {
         if (err) {
-          return next(err)
+          if (err.code === 11000) {
+            models.Waiters.findOne({
+              name: waiter.name
+            }, function(err, updateWaiter) {
+              if (err) {
+                return next(err)
+              }else {
+                updateWaiter.days = waiter.days
+                updateWaiter.save()
+                req.flash('error', "You have successfully updated your shifts")
+                res.redirect("/waiters/"+updateWaiter.name);
+              }
+            })
+          }
         } else {
           req.flash('error', 'You have successfully submitted your days');
-          res.render("waitersview/waiter")
+          res.render("waitersview/waiter",{
+            username: waiter.name
+          })
         }
-
       })
     }
   }
-  const admin = function (req, res) {
-    res.render('waitersview/admin')
+  const admin = function(req, res, next) {
+    res.render("waitersview/admin")
   }
+
   const getWaitersByDays = function(serverRes, btn, availWaiters) {
     if (btn === "Sunday") {
       serverRes.render('waitersview/admin', {
-        sunWaiters: availWaiters
+        sunWaiters: availWaiters,
+        shadeSun: getColor(availWaiters.length)
       })
-      console.log(availWaiters);
-    }else if(btn === "Monday") {
+    } else if (btn === "Monday") {
       serverRes.render('waitersview/admin', {
-        monWaiters: availWaiters
+        monWaiters: availWaiters,
+        shadeMon: getColor(availWaiters.length)
       })
-    }
-    else if(btn === "Tuesday") {
+    } else if (btn === "Tuesday") {
       serverRes.render('waitersview/admin', {
-        tuesWaiters: availWaiters
+        tuesWaiters: availWaiters,
+        shadeTues: getColor(availWaiters.length)
       })
-    }else if(btn === "Wednesday") {
+    } else if (btn === "Wednesday") {
       serverRes.render('waitersview/admin', {
-        wedWaiters: availWaiters
+        wedWaiters: availWaiters,
+        shadeWed: getColor(availWaiters.length)
       })
-    }else if(btn === "Thursday") {
+    } else if (btn === "Thursday") {
       serverRes.render('waitersview/admin', {
-        thursWaiters: availWaiters
+        thursWaiters: availWaiters,
+        shadeThur: getColor(availWaiters.length)
       })
-    }else if(btn === "Friday") {
+    } else if (btn === "Friday") {
       serverRes.render('waitersview/admin', {
-        frWaiters: availWaiters
+        frWaiters: availWaiters,
+        shadeFri: getColor(availWaiters.length)
       })
-    }
-    else if(btn === "Saturday") {
+    } else if (btn === "Saturday") {
       serverRes.render('waitersview/admin', {
-        satWaiters: availWaiters
+        satWaiters: availWaiters,
+        shadeSat: getColor(availWaiters.length)
       })
     }
   }
 
   const daysWaiter = function(req, res, next) {
     var btn = req.body.btnWaiter;
-  models.Waiters.find({days: btn}).exec(function(err, availWaiters){
-    if (err) {
-      return next(err);
-    }else {
-      getWaitersByDays(res, btn, availWaiters)
-    }
-  })
+    models.Waiters.find({
+      days: btn
+    }).exec(function(err, availWaiters) {
+      if (err) {
+        return next(err);
+      } else {
+        getWaitersByDays(res, btn, availWaiters)
+      }
+    })
 
   }
 
+  const getColor = function(availWaiters) {
+    if (availWaiters > 3) {
+      return "warning"
+
+    } else if (availWaiters < 3) {
+      return "danger"
+    }else {
+      return "success"
+    }
+
+  }
+  const reset = function(req, res, next) {
+
+    models.Waiters.remove({}).
+    exec(function(err, results) {
+      if (err) {
+        return next(err);
+      } else {
+        res.redirect("/days");
+      }
+    });
+  }
   return {
     index,
     showWaiterScreen,
     addWaiter,
     daysWaiter,
-    admin
+    admin,
+    reset
   }
 };

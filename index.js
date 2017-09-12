@@ -17,6 +17,11 @@ app.engine('handlebars', exphbs({defaultLayout: 'main'}))
 app.set('view engine', 'handlebars')
 app.use(express.static('public'))
 
+app.use(function(err, req, res, next) {
+console.error(err.stack);
+res.status(500).send(err.stack)
+})
+
 //prase application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({extended: false}))
 
@@ -33,6 +38,7 @@ app.get('/waiters/:username', waiterRoutes.showWaiterScreen)
 app.post('/waiters/:username', waiterRoutes.addWaiter)
 app.get('/days', waiterRoutes.admin)
 app.post('/days', waiterRoutes.daysWaiter)
+ app.get('/reset', waiterRoutes.reset);
 
 
 app.set('port', (process.env.PORT || 5000))
