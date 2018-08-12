@@ -18,7 +18,7 @@ var daysObject = function(shifts) {
 }
 
   const index = function(req, res) {
-    res.render("waitersview/waiter")
+    res.render("waitersview/landing")
   }
   const showWaiterScreen = function(req, res, next) {
     let username = convertName(req.params.username)

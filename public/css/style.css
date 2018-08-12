@@ -1,0 +1,64 @@
+.proto{
+    margin-top: -74px;
+    margin-left: -65px;
+    max-width: 200%;
+    width: 125%;
+}
+#particles {
+    left: 0%;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    position: absolute;
+    padding: 0 20px;
+    overflow: hidden;
+}
+.container-fluid {
+    width: 100%;
+    margin-right: auto;
+    margin-left: auto;
+    padding-right: 0px;
+    padding-left: 0px;
+    width: 100%;
+}
+
+.leftsection{
+    font-family: Arial, sans-serif;
+    font-size: 40px;
+    font-weight: bold;
+    line-height: normal;
+}
+@media (max-width: 380px) {
+.proto{
+    margin-top: 10px;
+}
+.mobileIMG{
+    height: auto;
+    width: 85%;
+    position: relative;
+    margin: auto;
+    margin-right: 7.5%;
+    margin-left: 15.5%;
+    /* margin-top: -380px */
+}
+.text-left{
+    font-family: Arial, sans-serif;
+    font-size: 30px;
+    font-weight: bold;
+    line-height: normal;
+    margin: auto;
+    text-align: center;
+}
+.brand{
+    font-family: Arial, sans-serif;
+    font-size: 30px;
+    font-weight: bold;
+    line-height: normal;
+    margin: auto;
+    text-align: center;
+    /* margin-top: 112px */
+}
+
+    }
+
+    

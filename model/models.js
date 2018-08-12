@@ -2,7 +2,7 @@ const mongoose = require('mongoose')
 module.exports = function (mongoUrl) {
   // Use native promises
 mongoose.Promise = global.Promise
-mongoose.connect(mongoUrl)
+mongoose.connect(mongoUrl, {useMongoClient: true})
 
 const waiterSchema = mongoose.Schema({
   days: [],

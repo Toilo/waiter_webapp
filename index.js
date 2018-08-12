@@ -7,15 +7,16 @@ const session = require('express-session')
 const mongoUrl = process.env.MONGO_DB_URL || 'mongodb://localhost/waitersDatabase'
 
 const WaiterRoutes = require('./mywaiter/waiter')
+const AdminRoute = require('./mywaiter/admin')
 const Models = require('./model/models')
-const models = Models(mongoUrl)
-
+const models = Models(mongoUrl);
+const adminRoute = AdminRoute(models) //Instantiate the routes
 const waiterRoutes = WaiterRoutes(models) //Instantiate the routes
 
 const app = express() //Instantiate expressjs server
 app.engine('handlebars', exphbs({defaultLayout: 'main'}))
 app.set('view engine', 'handlebars')
-app.use(express.static('public'))
+app.use(express.static('public'));
 
 app.use(function(err, req, res, next) {
 console.error(err.stack);
